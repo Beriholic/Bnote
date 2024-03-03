@@ -3,3 +3,4 @@
 pub mod prelude;
 
 pub mod note;
+pub mod total_info;

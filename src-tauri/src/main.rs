@@ -12,7 +12,8 @@ fn main() {
             create_note,
             delete_note_by_id,
             confirm_delete_note_by_id,
-            update_note_by_id
+            update_note_by_id,
+            get_total_number,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -3,6 +3,7 @@ use sea_orm::{ActiveModelTrait, DbErr, EntityTrait, QueryOrder, SelectColumns, S
 
 use super::{init::db_connect, models};
 use crate::entity::note::{self, ActiveModel, Entity as DbNote};
+use crate::entity::total_info::{ActiveModel as TotalActiveModel, Entity as TotalInfo};
 
 pub async fn get_note_by_id(id: i32) -> Result<Option<models::Note>> {
     let db = db_connect().await?;
@@ -111,6 +112,15 @@ pub async fn update_note_by_id(id: i32, title: &str, content: &str) -> Result<()
     return match res {
         Ok(_) => Ok(()),
         Err(e) => Err(e.into()),
+    };
+}
+pub async fn get_total_number() -> Result<i32> {
+    let db = db_connect().await?;
+    let total_info = TotalInfo::find_by_id(1).one(&db).await?;
+
+    return match total_info {
+        None => Ok(0),
+        Some(total_info) => Ok(total_info.total),
     };
 }
 

@@ -1,5 +1,3 @@
-use std::fmt::Result;
-
 use crate::db::{func, models};
 
 #[tauri::command]
@@ -62,4 +60,14 @@ pub async fn update_note_by_id(id: i32, title: String, content: String) -> bool 
             false
         }
     }
+}
+#[tauri::command]
+pub async fn get_total_number() -> i32 {
+    return match func::get_total_number().await {
+        Ok(number) => number,
+        Err(e) => {
+            eprintln!("Error: {:?}", e);
+            0
+        }
+    };
 }
