@@ -1,17 +1,14 @@
 <template>
-    <div class="container">
-        <n-flex>
-            <Func />
-            <Editor />
-        </n-flex>
-    </div>
-
+    <n-flex>
+        <Slide v-model:is-show="isShow" />
+        <RouterView v-show="isShow"></RouterView>
+        <Editor />
+    </n-flex>
 </template>
 
 <script setup lang="ts">
-import Func from './components/Func.vue'
-import Editor from './components/Editor.vue'
+import Slide from './components/Slide.vue';
+import Editor from './components/Editor.vue';
+import { ref } from 'vue';
+let isShow = ref<boolean>(true);
 </script>
-
-
-<style lang="less" scoped></style>
