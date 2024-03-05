@@ -3,12 +3,12 @@
         <n-scrollbar style="max-height: 100vh" class="scrollbar">
             <n-list>
                 <n-list-item v-for="node in nodelist" :key="node.id">
-                    <button class="info">
+                    <label class="info">
                         <n-ellipsis style="max-width: 240px">
                             {{ node.title }}
                         </n-ellipsis>
                         {{ node.createTime }}
-                    </button>
+                    </label>
                 </n-list-item>
 
             </n-list>
@@ -26,6 +26,13 @@
     .info {
         margin: atuo;
     }
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
 }
 </style>
 
