@@ -64,6 +64,8 @@ pub async fn create_note(title: &str, content: &str) -> Result<()> {
     .save(&db)
     .await;
 
+    add_total_number(content.len() as i32).await?;
+
     return match res {
         Ok(_) => Ok(()),
         Err(e) => Err(e.into()),
@@ -123,6 +125,18 @@ pub async fn get_total_number() -> Result<i32> {
         Some(total_info) => Ok(total_info.total),
     };
 }
+async fn add_total_number(add_number: i32) -> Result<()> {
+    let db_total_number = get_total_number().await?;
+
+    let db = db_connect().await?;
+    let total_info = TotalInfo::find_by_id(1).one(&db).await?;
+    let mut total_info: TotalActiveModel = total_info.unwrap().into();
+
+    total_info.total = Set(db_total_number + add_number);
+
+    total_info.update(&db).await?;
+    Ok(())
+}
 
 #[tokio::test]
 async fn test_get_note_by_id() {
@@ -153,4 +167,16 @@ async fn test_update_note_by_id() {
     update_note_by_id(1, "test", "test test test test")
         .await
         .unwrap();
+}
+#[tokio::test]
+async fn test_get_total_number() {
+    let res = get_total_number().await.unwrap();
+    eprintln!("{}", res);
+}
+
+#[tokio::test]
+async fn test_add_total_number() {
+    add_total_number(10).await.unwrap();
+    let number = get_total_number().await.unwrap();
+    assert_eq!(number, 10);
 }
