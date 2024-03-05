@@ -1,17 +1,25 @@
 <template>
-    <input type="text" v-model="search" class="search">
+    <h1>搜索 🔍</h1>
+    <v-divider :thickness="5"></v-divider>
+    <v-text-field class="search-input" variant="solo-filled" v-model="input"></v-text-field>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const search = ref<string>('');
-
+let input = ref('')
 </script>
 
 <style lang="less" scoped>
-.search {
-    max-height: 22px;
-    margin-top: 12px;
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    margin-top: 50px;
+    margin-left: 500px;
+    margin-right: 500px;
 }
 </style>

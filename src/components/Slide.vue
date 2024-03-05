@@ -1,78 +1,77 @@
 <template>
-    <div class="bar">
-        <button class=" file">
-            <icon-file class="rotating" :style="{ fontSize: '30px' }" @click="goTo('/', 0)" />
-        </button>
-        <button class="search">
-            <icon-search class="rotating" :style="{ fontSize: '30px' }" @click="goTo('/search', 1)" />
-        </button>
-        <div class="info">
-            <Info />
-        </div>
-    </div>
+    <v-navigation-drawer :width="100">
+        <v-list-item>
+            <button class="file">
+                <icon-file :style="{ fontSize: '50px' }" @click="goTo('/')" />
+            </button>
+        </v-list-item>
+        <v-list-item>
+            <button class="search" @click="goTo('/search')">
+                <icon-search :style="{ fontSize: '50px' }" />
+            </button>
+        </v-list-item>
+        <!-- <v-list-item>
+            <button class="info" @click="goTo('/info')">
+                <icon-info-circle :style="{ fontSize: '50px' }" />
+            </button>
+        </v-list-item> -->
+        <v-list-item>
+            <button v-if="is_dark_theme" @click="switch_theme">
+                <icon-moon-fill :style="{ fontSize: '50px' }" />
+            </button>
+            <button v-else @click="switch_theme">
+                <icon-moon :style="{ fontSize: '50px' }" />
+            </button>
+        </v-list-item>
+        <v-list-item>
+            <button class="setting" @click="goTo('/setting')">
+                <icon-settings :style="{ fontSize: '50px' }" />
+            </button>
+        </v-list-item>
+    </v-navigation-drawer>
+
 
 </template>
 
-<style lang="less" scoped>
-.total {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-.bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .rotating {
-        transition: transform 0.6s ease;
-    }
-
-    .rotating:hover {
-        transform: rotate(180deg);
-    }
-
-    button {
-        background-color: #FFFFFF;
-        border-style: none;
-        outline: none;
-        padding-left: 10px;
-        padding-top: 10px;
-        padding-bottom: 8px;
-    }
-
-}
-</style>
-
-
 <script setup lang="ts">
-import Info from '../views/Info.vue';
-import { onMounted } from 'vue';
+import { ref } from 'vue';
+import { useTheme } from 'vuetify'
 import { useRouter } from 'vue-router';
-const router = useRouter();
-let currentRoute = 0;
-let isShow = true;
-const emit = defineEmits(['update:isShow']);
 
-onMounted(() => {
-    isShow = true;
-});
+const theme = useTheme()
 
-const updateHidden = (newValue: boolean) => {
-    isShow = newValue;
-    emit('update:isShow', newValue);
-};
-function goTo(to: string, route: number) {
-    if (currentRoute === route) {
-        updateHidden(!isShow);
-    } else {
-        currentRoute = route;
-        router.push(to);
-        if (isShow === false) {
-            updateHidden(!isShow);
-        }
-    }
+let is_dark_theme = ref(false)
+const switch_theme = () => {
+    theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+    is_dark_theme.value = !is_dark_theme.value
 }
+
+//----------------------------------
+const router = useRouter()
+
+function goTo(to: string) {
+    router.push(to)
+}
+
+
+
+
+
 
 </script>
+
+<style lang="less">
+button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #d1d1d1;
+    }
+}
+</style>
