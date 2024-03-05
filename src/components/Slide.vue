@@ -1,13 +1,13 @@
 <template>
-    <v-navigation-drawer :width="100">
+    <v-navigation-drawer :width="85">
         <v-list-item>
             <button class="file">
-                <icon-file :style="{ fontSize: '50px' }" @click="goTo('/')" />
+                <icon-file :style="{ fontSize: '30px' }" @click="goTo('/')" />
             </button>
         </v-list-item>
         <v-list-item>
             <button class="search" @click="goTo('/search')">
-                <icon-search :style="{ fontSize: '50px' }" />
+                <icon-search :style="{ fontSize: '30px' }" />
             </button>
         </v-list-item>
         <!-- <v-list-item>
@@ -17,15 +17,15 @@
         </v-list-item> -->
         <v-list-item>
             <button v-if="is_dark_theme" @click="switch_theme">
-                <icon-moon-fill :style="{ fontSize: '50px' }" />
+                <icon-moon-fill :style="{ fontSize: '30px' }" />
             </button>
             <button v-else @click="switch_theme">
-                <icon-moon :style="{ fontSize: '50px' }" />
+                <icon-moon :style="{ fontSize: '30px' }" />
             </button>
         </v-list-item>
         <v-list-item>
             <button class="setting" @click="goTo('/setting')">
-                <icon-settings :style="{ fontSize: '50px' }" />
+                <icon-settings :style="{ fontSize: '30px' }" />
             </button>
         </v-list-item>
     </v-navigation-drawer>

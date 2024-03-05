@@ -4,7 +4,7 @@
         <v-divider :thickness="5"></v-divider>
         <div class="container">
             <div v-for="note in notes" :key="note.id">
-                <v-card hover class="block" width="700" height="400">
+                <v-card hover class="block" width="400" height="250">
                     <v-card-title class="title">
                         {{ note.title }}
                     </v-card-title>
@@ -60,7 +60,7 @@ const mock_data = () => {
 }
 
 h1 {
-    margin: 30px;
+    margin: 25px;
     display: flex;
     justify-content: center;
 }

@@ -18,8 +18,8 @@ h1 {
 }
 
 .search-input {
-    margin-top: 50px;
-    margin-left: 500px;
-    margin-right: 500px;
+    margin-top: 25px;
+    margin-left: 250px;
+    margin-right: 250px;
 }
 </style>
