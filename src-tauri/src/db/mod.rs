@@ -1,3 +1,3 @@
-pub mod func;
-mod init;
+pub mod funcs;
+pub mod init;
 pub mod models;
