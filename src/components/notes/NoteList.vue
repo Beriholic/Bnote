@@ -1,36 +1,28 @@
 <template>
-    <div>
-        <h1>笔记列表 💾</h1>
-        <v-divider :thickness="5"></v-divider>
-        <div class="container">
-            <div v-for="note in notes" :key="note.id">
-                <v-card hover class="block" width="400" height="250">
-                    <v-card-title class="title">
-                        {{ note.title }}
-                    </v-card-title>
-                    <v-card-subtitle class="create-time">
-                        {{ note.createdAt }}
-                    </v-card-subtitle>
-                </v-card>
-            </div>
+    <div class="container">
+        <div v-for="note in notes" :key="note.id">
+            <v-card hover class="block" width="400" height="250">
+                <v-card-title class="title">
+                    {{ note.title }}
+                </v-card-title>
+                <v-card-subtitle class="create-time">
+                    {{ note.createdAt }}
+                </v-card-subtitle>
+            </v-card>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import Note from '../models/Note';
-
+import Note from '../../models/Note';
 const notes = ref<Note[]>([]);
-
 onMounted(() => {
     mock_data()
 })
 computed(() => {
     mock_data()
 })
-
-
 const mock_data = () => {
     for (let i = 1; i <= 9; i++) {
         notes.value.push(
@@ -45,26 +37,9 @@ const mock_data = () => {
 }
 
 
-
 </script>
 
-<style lang="less" scoped>
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    align-self: center;
-    justify-content: center;
-    flex-grow: 1;
-    margin-top: 30px;
-
-}
-
-h1 {
-    margin: 25px;
-    display: flex;
-    justify-content: center;
-}
-
+<style scoped lang="less">
 .block {
     display: flex;
     flex-direction: column;

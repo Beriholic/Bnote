@@ -1,12 +1,34 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import NoteList from "../views/NoteList.vue";
+import Notes from "../views/Notes.vue";
 import Search from "../views/Search.vue";
 import Setting from "../views/Setting.vue";
 const routes = [
   {
     path: "/",
-    name: "NoteList",
-    component: NoteList,
+    redirect: "/notes",
+  },
+  {
+    path: "/notes",
+    name: "Notes",
+    redirect: "/notes/list",
+    component: Notes,
+    children: [
+      {
+        path: "list",
+        name: "list",
+        component: () => import("../components/notes/NoteList.vue"),
+      },
+      {
+        path: "categories",
+        name: "caregories",
+        component: () => import("../components/notes/Categories.vue"),
+      },
+      {
+        path: "timeline",
+        name: "timeline",
+        component: () => import("../components/notes/TimeLine.vue"),
+      },
+    ],
   },
   {
     path: "/search",

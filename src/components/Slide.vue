@@ -10,11 +10,6 @@
                 <icon-search :style="{ fontSize: '30px' }" />
             </button>
         </v-list-item>
-        <!-- <v-list-item>
-            <button class="info" @click="goTo('/info')">
-                <icon-info-circle :style="{ fontSize: '50px' }" />
-            </button>
-        </v-list-item> -->
         <v-list-item>
             <button v-if="is_dark_theme" @click="switch_theme">
                 <icon-moon-fill :style="{ fontSize: '30px' }" />
