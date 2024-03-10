@@ -1,10 +1,11 @@
 <template>
     <div>
-        <h1>笔记列表 💾 </h1>
+        <h1>笔记 💾 </h1>
         <div class="options">
             <v-btn @click="switch_option('list')">列表</v-btn>
             <v-btn @click="switch_option('categories')">分类</v-btn>
             <v-btn @click="switch_option('timeline')">时间线</v-btn>
+            <v-btn @click="switch_option('new')">新建</v-btn>
         </div>
         <v-divider :thickness="5"></v-divider>
         <router-view></router-view>
@@ -53,7 +54,6 @@ h1 {
 
     .create-time {
         font-size: 14px;
-        color: #666;
     }
 
 }
@@ -73,4 +73,4 @@ h1 {
     }
 
 }
-</style>../components/notes/NoteList.vue
+</style>

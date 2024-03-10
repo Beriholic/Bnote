@@ -9,6 +9,10 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 const vuetify = createVuetify({
   components,
@@ -20,4 +24,5 @@ createApp(App)
   .use(vuetify)
   .use(ArcoVue)
   .use(ArcoVueIcon)
+  .use(pinia)
   .mount("#app");

@@ -29,11 +29,11 @@ pub async fn get_note_list() -> Option<Vec<models::Note>> {
 }
 
 #[tauri::command]
-pub async fn create_note(title: String, content: String) -> bool {
+pub async fn create_note(title: String, content: String, word_cnt: i32) -> bool {
     let db = new_connection().await;
     match note::create_note(&db, &title, &content).await {
         Ok(_) => {
-            return add_total_number(&db, content.len() as i32).await.is_ok();
+            return add_total_number(&db, word_cnt).await.is_ok();
         }
         Err(e) => {
             eprintln!("Error: {:?}", e);
@@ -73,4 +73,8 @@ pub async fn update_note_by_id(id: i32, title: String, content: String) -> bool 
             false
         }
     }
+}
+#[tauri::command]
+pub async fn ping() -> String {
+    format!("Pong")
 }

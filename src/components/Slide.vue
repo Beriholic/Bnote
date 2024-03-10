@@ -11,7 +11,7 @@
             </button>
         </v-list-item>
         <v-list-item>
-            <button v-if="is_dark_theme" @click="switch_theme">
+            <button v-if="is_dark_mode" @click="switch_theme">
                 <icon-moon-fill :style="{ fontSize: '30px' }" />
             </button>
             <button v-else @click="switch_theme">
@@ -29,16 +29,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useTheme } from 'vuetify'
 import { useRouter } from 'vue-router';
-
+import { useThemeStore } from '../store';
+import { computed, ref } from 'vue';
+const utheme = useThemeStore()
 const theme = useTheme()
 
-let is_dark_theme = ref(false)
+const is_dark_mode = computed(() => {
+    let mode: boolean = theme.global.current.value.dark
+    return ref(mode)
+})
 const switch_theme = () => {
-    theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-    is_dark_theme.value = !is_dark_theme.value
+    utheme.toggleTheme()
 }
 
 //----------------------------------
