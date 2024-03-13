@@ -13,7 +13,9 @@ fn get_db_path() -> String {
 }
 
 pub async fn db_connect() -> Result<DatabaseConnection, DbErr> {
-    let db_url = format!("sqlite:///{}", get_db_path());
+    let db_path = get_db_path();
+
+    let db_url = format!("sqlite:///{}?mode=rwc", db_path);
 
     let mut opt = ConnectOptions::new(db_url);
     opt.max_connections(100)
@@ -24,6 +26,7 @@ pub async fn db_connect() -> Result<DatabaseConnection, DbErr> {
         .max_lifetime(Duration::from_secs(8));
 
     let db = Database::connect(opt).await?;
+
     Ok(db)
 }
 
