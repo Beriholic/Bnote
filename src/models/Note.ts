@@ -5,14 +5,14 @@ class Note {
   title: string;
   content: string;
   wordCount: number;
-  createdAt: string;
+  created_at: string;
 
   constructor() {
     this.id = 0;
     this.title = "";
     this.content = "";
     this.wordCount = 0;
-    this.createdAt = "";
+    this.created_at = "";
   }
   async save(): Promise<boolean> {
     let res = await invoke("create_note", {
@@ -43,7 +43,7 @@ export function new_note(
   note.title = title;
   note.content = content;
   note.wordCount = wordCount;
-  note.createdAt = createdAt;
+  note.created_at = createdAt;
   return note;
 }
 

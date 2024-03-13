@@ -83,6 +83,9 @@ const load_note_from_cache = () => {
 }
 
 function save_note() {
+    if (note.value.content.length == 0) {
+        return
+    }
     note.value.title = ExtractTitle(note.value.content)
     const res = note.value.save();
     console.log(res)

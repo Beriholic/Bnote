@@ -3,7 +3,7 @@
         <v-timeline align="start">
             <v-timeline-item v-for="note in notes" :key="note.id">
                 <template v-slot:opposite>
-                    {{ note.createdAt }}
+                    {{ note.created_at }}
                 </template>
                 <div class="text-h6">{{ note.title }}</div>
             </v-timeline-item>
@@ -16,18 +16,19 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import Note, { new_note } from '../../models/Note';
+import Note from '../../models/Note';
+import { invoke } from '@tauri-apps/api';
 let notes = ref<Note[]>([]);
 onMounted(() => {
-    mock_data()
+    getNoteList()
 })
 
-const mock_data = () => {
-    for (let i = 1; i <= 10; i++) {
-        notes.value.push(
-            new_note(i, `测试-笔记${i}`, `这是测试文章${i}的内容测试测试测试测测试测.....`, 114514, '2023-12-32')
-        )
-    }
+
+async function getNoteList() {
+    await invoke('get_note_list').then((res) => {
+        notes.value = res as Note[]
+        console.log(notes.value)
+    })
 }
 
 

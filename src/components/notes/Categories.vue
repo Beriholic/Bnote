@@ -11,26 +11,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Categories from '../../models/Categories';
+import { invoke } from '@tauri-apps/api';
 const categories = ref<Categories[]>([]);
-onMounted(() => {
-    mock_data()
-})
-computed(() => {
-    mock_data()
-})
-const mock_data = () => {
-    for (let i = 1; i <= 9; i++) {
-        categories.value.push(
-            new Categories(
-                i,
-                `测试-分类${i}`,
-            )
-        )
-    }
-}
 
+onMounted(() => {
+    getCategoriesList()
+})
+
+async function getCategoriesList() {
+    await invoke('get_categories_list').then((res) => {
+        categories.value = res as Categories[]
+    })
+
+}
 
 </script>
 
