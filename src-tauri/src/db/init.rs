@@ -2,8 +2,18 @@ use color_eyre::eyre::Result;
 use sea_orm::{ConnectOptions, Database, DatabaseConnection, DbErr};
 use std::time::Duration;
 
+#[cfg(unix)]
+fn get_db_path() -> String {
+    format!("{}/.config/Bnote/bnote.db", env!("HOME"))
+}
+
+#[cfg(windows)]
+fn get_db_path() -> String {
+    format!("{}\\Bnote\\bnote.db", env!("LOCALAPPDATA"))
+}
+
 pub async fn db_connect() -> Result<DatabaseConnection, DbErr> {
-    let db_url = format!("sqlite:///home/beri/.config/Bnote/bnote.db",);
+    let db_url = format!("sqlite:///{}", get_db_path());
 
     let mut opt = ConnectOptions::new(db_url);
     opt.max_connections(100)
