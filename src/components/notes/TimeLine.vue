@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <v-timeline align="start">
+        <v-timeline align="start" v-if="notes.length != 0">
             <v-timeline-item v-for="note in notes" :key="note.id">
                 <template v-slot:opposite>
                     {{ note.created_at }}
@@ -8,6 +8,9 @@
                 <div class="text-h6">{{ note.title }}</div>
             </v-timeline-item>
         </v-timeline>
+        <div v-else>
+            <Empty />
+        </div>
 
     </div>
 
@@ -18,6 +21,7 @@
 import { onMounted, ref } from 'vue';
 import Note from '../../models/Note';
 import { invoke } from '@tauri-apps/api';
+import Empty from '../Empty.vue';
 let notes = ref<Note[]>([]);
 onMounted(() => {
     getNoteList()

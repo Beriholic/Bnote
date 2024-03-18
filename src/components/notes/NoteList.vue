@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-for="note in notes" :key="note.id">
+        <div v-for="note in notes" :key="note.id" v-if="notes.length != 0">
             <v-card hover class="block" width="400" height="250">
                 <v-card-title class="title">
                     {{ note.title }}
@@ -10,6 +10,9 @@
                 </v-card-subtitle>
             </v-card>
         </div>
+        <div v-else>
+            <Empty />
+        </div>
     </div>
 </template>
 
@@ -17,6 +20,7 @@
 import { onMounted, ref } from 'vue';
 import Note from '../../models/Note';
 import { invoke } from '@tauri-apps/api';
+import Empty from '../Empty.vue';
 let notes = ref<Note[]>([]);
 
 onMounted(() => {

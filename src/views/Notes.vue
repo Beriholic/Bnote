@@ -3,7 +3,7 @@
         <h1>笔记 💾 </h1>
         <div class="options">
             <v-btn @click="switch_option('list')">列表</v-btn>
-            <v-btn @click="switch_option('categories')">分类</v-btn>
+            <!-- <v-btn @click="switch_option('categories')">分类</v-btn> -->
             <v-btn @click="switch_option('timeline')">时间线</v-btn>
             <v-btn @click="switch_option('new')">新建</v-btn>
         </div>

@@ -1,11 +1,14 @@
 <template>
     <div class="container">
-        <div v-for="cate in categories" :key="cate.id">
+        <div v-for="cate in categories" :key="cate.id" v-if="categories.length != 0">
             <v-card hover class="block" width="400" height="250">
                 <v-card-title class="name">
                     {{ cate.name }}
                 </v-card-title>
             </v-card>
+        </div>
+        <div v-else>
+            <Empty />
         </div>
     </div>
 </template>
@@ -14,6 +17,7 @@
 import { onMounted, ref } from 'vue';
 import Categories from '../../models/Categories';
 import { invoke } from '@tauri-apps/api';
+import Empty from '../Empty.vue';
 const categories = ref<Categories[]>([]);
 
 onMounted(() => {
