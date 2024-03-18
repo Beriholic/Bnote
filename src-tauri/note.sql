@@ -3,7 +3,7 @@ CREATE TABLE note(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    created_at DATETIME DEFAULT (datetime('now')),
+    created_at DATETIME DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime'))
     is_delete INTEGER DEFAULT 0,
     category_id INTEGER DEFAULT NULL
 );
